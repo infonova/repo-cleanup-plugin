@@ -1,10 +1,11 @@
 package hudson.plugins.repo_cleanup;
 
+import hudson.Extension;
 import hudson.model.BuildableItemWithBuildWrappers;
 import hudson.model.Item;
 import hudson.model.listeners.ItemListener;
 
-
+@Extension
 public class RepoCleanupItemListener extends ItemListener {
 
     @Override
