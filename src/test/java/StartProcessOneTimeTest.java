@@ -6,7 +6,7 @@ import org.junit.Test;
 
 
 
-public class StartProcessTest {
+public class StartProcessOneTimeTest {
 
     @Test
     public void testName() throws Exception {
