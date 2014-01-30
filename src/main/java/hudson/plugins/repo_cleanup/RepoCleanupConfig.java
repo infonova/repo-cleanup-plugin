@@ -2,36 +2,34 @@ package hudson.plugins.repo_cleanup;
 
 import hudson.Extension;
 import hudson.model.Descriptor;
+import hudson.util.FormValidation;
 
-import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.annotation.CheckForNull;
 
 import jenkins.model.GlobalConfiguration;
 import net.sf.json.JSONObject;
 
-import org.apache.commons.lang.time.DurationFormatUtils;
+import org.apache.commons.lang.StringUtils;
+import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.StaplerRequest;
 
 @Extension
 public class RepoCleanupConfig extends GlobalConfiguration {
 
 
-    /**
-     * The chosen format for displaying the system clock time, as recognised by {@link SimpleDateFormat}.
-     */
     @CheckForNull
     private String pathToMasterRepo;
 
-    /**
-     * The chosen format for displaying the elapsed time, as recognised by {@link DurationFormatUtils}.
-     */
     @CheckForNull
     private String user;
 
-    /**
-     * Constructor.
-     */
+    @CheckForNull
+    private String dontExecuteOnLabels;
+
     public RepoCleanupConfig() {
         load();
     }
@@ -43,11 +41,12 @@ public class RepoCleanupConfig extends GlobalConfiguration {
         return true;
     }
 
+
     public String getPathToMasterRepo() {
         return pathToMasterRepo;
     }
 
-    public void setPathToMasterRepo(String pathToMasterRepo) {
+    public void setPathToMasterRepo(@CheckForNull String pathToMasterRepo) {
         this.pathToMasterRepo = pathToMasterRepo;
     }
 
@@ -55,8 +54,44 @@ public class RepoCleanupConfig extends GlobalConfiguration {
         return user;
     }
 
-    public void setUser(String user) {
+    public void setUser(@CheckForNull String user) {
         this.user = user;
+    }
+
+    public void setDontExecuteOnLabels(@CheckForNull String dontExecuteOnLabels) {
+        this.dontExecuteOnLabels = dontExecuteOnLabels;
+    }
+
+    public Set<String> getDontExecuteOnLabelsAsList() {
+        if (StringUtils.isBlank(dontExecuteOnLabels)) {
+            return new HashSet<String>();
+        }
+        Set<String> set = new HashSet<String>(Arrays.asList(dontExecuteOnLabels.split(",")));
+
+        Set<String> result = new HashSet<String>();
+        for (String string : set) {
+            result.add(string.trim());
+        }
+
+        return result;
+    }
+
+    public FormValidation doCheckUser(@QueryParameter String user) {
+        if (StringUtils.isBlank(user)) {
+            return FormValidation.error("mandatory field");
+        }
+        return FormValidation.ok();
+    }
+
+    public FormValidation doCheckPathToMasterRepo(@QueryParameter String pathToMasterRepo) {
+        if (StringUtils.isBlank(pathToMasterRepo)) {
+            return FormValidation.error("mandatory field");
+        }
+        return FormValidation.ok();
+    }
+
+    public String getDontExecuteOnLabels() {
+        return dontExecuteOnLabels;
     }
 
 }

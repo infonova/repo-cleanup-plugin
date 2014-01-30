@@ -7,5 +7,8 @@
     <f:entry title="${%User for cross host repo sync}" field="user">
       <f:textbox/>
     </f:entry>
+    <f:entry title="${%Do not execute Cleanup on Nodes with these labels}" field="dontExecuteOnLabels">
+      <f:textbox/>
+    </f:entry>
   </f:section>
 </j:jelly>
