@@ -22,9 +22,9 @@
     </developers>
 
     <scm>
-        <connection>scm:svn:http://grzsvn01.infonova.at/ise/tools/jenkins/plugins/token-plugin/trunk</connection>
-        <developerConnection>scm:svn:http://grzsvn01.infonova.at/ise/tools/jenkins/plugins/token-plugin/trunk</developerConnection>
-        <url>http://grzsvn01.infonova.at/ise/tools/jenkins/plugins/token-plugin/trunk</url>
+        <connection>scm:svn:http://grzsvn01.infonova.at/ise/tools/jenkins/plugins/repo-cleanup-plugin/trunk</connection>
+        <developerConnection>scm:svn:http://grzsvn01.infonova.at/ise/tools/jenkins/plugins/repo-cleanup-plugin/trunk</developerConnection>
+        <url>http://grzsvn01.infonova.at/ise/tools/jenkins/plugins/repo-cleanup-plugin/trunk</url>
     </scm>
 
     <distributionManagement>
@@ -41,5 +41,30 @@
         </snapshotRepository>
     </distributionManagement>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.jenkins-ci.tools</groupId>
+                <artifactId>maven-hpi-plugin</artifactId>
+                <extensions>true</extensions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+        </plugins>
+
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-webdav-jackrabbit</artifactId>
+                <version>2.4</version>
+            </extension>
+        </extensions>
+    </build>
 </project>
 
