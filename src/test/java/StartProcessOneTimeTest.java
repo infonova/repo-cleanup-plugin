@@ -2,12 +2,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 
 
 public class StartProcessOneTimeTest {
 
+    @Ignore
     @Test
     public void testName() throws Exception {
 
