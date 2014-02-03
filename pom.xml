@@ -10,7 +10,7 @@
     <artifactId>repository-cleanup</artifactId>
     <packaging>hpi</packaging>
     <name>Jenkins local repository cache Cleanup Plugin</name>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.1</version>
 
     <developers>
         <developer>
