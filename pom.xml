@@ -10,7 +10,7 @@
     <artifactId>repository-cleanup</artifactId>
     <packaging>hpi</packaging>
     <name>Jenkins local repository cache Cleanup Plugin</name>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.2</version>
 
     <developers>
         <developer>
@@ -21,9 +21,9 @@
     </developers>
 
     <scm>
-        <connection>scm:svn:http://grzsvn01.infonova.at/ise/tools/jenkins/plugins/token-plugin/trunk</connection>
-        <developerConnection>scm:svn:http://grzsvn01.infonova.at/ise/tools/jenkins/plugins/token-plugin/trunk</developerConnection>
-        <url>http://grzsvn01.infonova.at/ise/tools/jenkins/plugins/token-plugin/trunk</url>
+        <connection>scm:svn:http://grzsvn01.infonova.at/ise/tools/jenkins/plugins/token-plugin/tags/repository-cleanup-0.2</connection>
+        <developerConnection>scm:svn:http://grzsvn01.infonova.at/ise/tools/jenkins/plugins/token-plugin/tags/repository-cleanup-0.2</developerConnection>
+        <url>http://grzsvn01.infonova.at/ise/tools/jenkins/plugins/token-plugin/tags/repository-cleanup-0.2</url>
     </scm>
 
     <distributionManagement>
