@@ -71,7 +71,7 @@ public class PreBuildCleanup extends BuildWrapper {
         } catch (Exception ex) {
             Logger.getLogger(PreBuildCleanup.class.getName()).log(Level.SEVERE, null, ex);
             listener.getLogger().append("Cannot reset repository cache: " + ex.getCause() + "\n");
-            throw new AbortException("Cannot reset repository cache: " + ex.getCause() + "\n");
+            //            throw new AbortException("Cannot reset repository cache: " + ex.getCause() + "\n");
         }
 
     }
