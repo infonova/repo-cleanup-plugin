@@ -7,6 +7,7 @@
         <version>1.532.1</version>
     </parent>
 
+    <groupId>com.infonova.jenkins.plugins</groupId>
     <artifactId>repository-cleanup</artifactId>
     <packaging>hpi</packaging>
     <name>Jenkins local repository cache Cleanup Plugin</name>
