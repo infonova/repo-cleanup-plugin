@@ -10,8 +10,14 @@
     <groupId>com.infonova.jenkins.plugins</groupId>
     <artifactId>repository-cleanup</artifactId>
     <packaging>hpi</packaging>
-    <name>Jenkins local repository cache Cleanup Plugin</name>
+    <name>Jenkins Local Rrepository Cache Cleanup Plugin</name>
     <version>0.3-SNAPSHOT</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven-hpi-plugin.version>1.97</maven-hpi-plugin.version>
+        <target-jdk.version>1.6</target-jdk.version>
+    </properties>
 
     <developers>
         <developer>
@@ -22,9 +28,9 @@
     </developers>
 
     <scm>
-        <connection>scm:svn:http://grzsvn01.infonova.at/ise/tools/jenkins/plugins/token-plugin/trunk</connection>
-        <developerConnection>scm:svn:http://grzsvn01.infonova.at/ise/tools/jenkins/plugins/token-plugin/trunk</developerConnection>
-        <url>http://grzsvn01.infonova.at/ise/tools/jenkins/plugins/token-plugin/trunk</url>
+        <connection>scm:svn:http://grzsvn01.infonova.at/ise/tools/jenkins/plugins/repo-cleanup-plugin/trunk</connection>
+        <developerConnection>scm:svn:http://grzsvn01.infonova.at/ise/tools/jenkins/plugins/repo-cleanup-plugin/trunk</developerConnection>
+        <url>http://grzsvn01.infonova.at/ise/tools/jenkins/plugins/repo-cleanup-plugin/trunk</url>
     </scm>
 
     <distributionManagement>
@@ -52,8 +58,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>${target-jdk.version}</source>
+                    <target>${target-jdk.version}</target>
                 </configuration>
             </plugin>
         </plugins>
