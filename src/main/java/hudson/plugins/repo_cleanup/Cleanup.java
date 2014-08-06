@@ -3,6 +3,7 @@ package hudson.plugins.repo_cleanup;
 import hudson.FilePath.FileCallable;
 import hudson.model.BuildListener;
 import hudson.remoting.VirtualChannel;
+import hudson.util.IOUtils;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -51,31 +52,39 @@ class Cleanup implements FileCallable<Object> {
         commandWithArgs.add(user + "@" + masterFqdn + ":" + pathToMasterRepo);
         commandWithArgs.add(f.getPath());
 
-        listener.getLogger().println("synchronizing with command: " + StringUtils.join(commandWithArgs, " "));
+        listener.getLogger().println("[repo-cleanup] synchronizing with command: " + StringUtils.join(commandWithArgs, " "));
 
         ProcessBuilder pb = new ProcessBuilder(commandWithArgs);
         Process p = pb.start();
 
-        BufferedReader stdOut = new BufferedReader(new InputStreamReader(p.getInputStream()));
-        BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+        BufferedReader stdOut = null;
+        BufferedReader stdError = null;
 
-        String s = null;
-        System.out.println("Here is the standard output of the command:\n");
-        listener.getLogger().println("Here is the standard output of the command:\n");
-        while ((s = stdOut.readLine()) != null) {
-            System.out.println(s);
-            listener.getLogger().println(s);
-        }
-        System.out.println("Here is the standard error of the command (if any):\n");
-        listener.getLogger().println("Here is the standard error of the command (if any):\n");
-        while ((s = stdError.readLine()) != null) {
-            System.out.println(s);
-            listener.getLogger().println(s);
-        }
+        try {
+            stdOut = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
 
-        int val = p.waitFor();
-        if (val != 0) {
-            throw new IOException("Exception during RSync; return code = " + val);
+            String s = null;
+
+            listener.getLogger().println("[repo-cleanup] Here is the standard output of the command:");
+            while ((s = stdOut.readLine()) != null) {
+                listener.getLogger().println("[repo-cleanup] " + s);
+            }
+            listener.getLogger().println("[repo-cleanup] Here is the standard error of the command (if any):");
+            while ((s = stdError.readLine()) != null) {
+                listener.getLogger().println("[repo-cleanup] " + s);
+            }
+
+            int val = p.waitFor();
+            if (val != 0) {
+                throw new IOException("Exception during rsync; return code = " + val);
+            }
+        } finally {
+            // normally not needed, but class Process closes streams when gc is invoked,
+            // so it is generally a good idea to close them
+            IOUtils.closeQuietly(stdOut);
+            IOUtils.closeQuietly(stdError);
+            IOUtils.closeQuietly(p.getOutputStream());
         }
         return null;
     }

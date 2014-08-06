@@ -52,11 +52,11 @@ public class PreBuildCleanup extends BuildWrapper {
         Set<LabelAtom> assignedLabels = build.getBuiltOn().getAssignedLabels();
 
         if (isSkipPreBuildCleanup(assignedLabels, config.getDontExecuteOnLabelsAsList(), build.getBuiltOnStr())) {
-            listener.getLogger().append("\nSkipping reset of local repository cache...\n");
+            listener.getLogger().append("\n[repo-cleanup] Skipping reset of local Maven repository\n");
             return;
         }
 
-        listener.getLogger().append("\nResetting local repository cache...\n");
+        listener.getLogger().append("\n[repo-cleanup] Resetting local Maven repository\n");
 
         try {
             FilePath homeDirectory = build.getBuiltOn().createPath(build.getEnvironment(listener).get("HOME", ""));
@@ -66,11 +66,11 @@ public class PreBuildCleanup extends BuildWrapper {
 
             m2Repo.act(new Cleanup(listener, CLEANUP_CMD, config, masterFqdn));
 
-            listener.getLogger().append("done\n\n");
+            listener.getLogger().append("[repo-cleanup] done\n\n");
 
         } catch (Exception ex) {
-            Logger.getLogger(PreBuildCleanup.class.getName()).log(Level.SEVERE, null, ex);
-            listener.getLogger().append("Cannot reset repository cache: " + ex.getCause() + "\n");
+            Logger.getLogger(PreBuildCleanup.class.getName()).log(Level.SEVERE, "Cannot reset local Maven repository", ex);
+            listener.getLogger().append("[repo-cleanup] Cannot reset local Maven repository: " + ex.getMessage() + " (Please see Jenkins Log for more Information)\n");
             //            throw new AbortException("Cannot reset repository cache: " + ex.getCause() + "\n");
         }
 
