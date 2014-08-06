@@ -10,7 +10,7 @@
     <groupId>com.infonova.jenkins.plugins</groupId>
     <artifactId>repository-cleanup</artifactId>
     <packaging>hpi</packaging>
-    <name>Jenkins Local Rrepository Cache Cleanup Plugin</name>
+    <name>Local Repository Cleanup Plugin</name>
     <version>0.3-SNAPSHOT</version>
 
     <properties>
@@ -30,7 +30,7 @@
     <scm>
         <connection>scm:git:ssh://git.infonova.at:29418/jenkins/plugins/repo-cleanup-plugin.git</connection>
         <developerConnection>scm:git:ssh://git.infonova.at:29418/jenkins/plugins/repo-cleanup-plugin.git</developerConnection>
-        <url>http://grzsvn01.infonova.at/ise/tools/jenkins/plugins/repo-cleanup-plugin/trunk</url>
+        <url>http://git.infonova.at:8080/gitblit/summary/?r=jenkins/plugins/repo-cleanup-plugin.git</url>
     </scm>
 
     <distributionManagement>
