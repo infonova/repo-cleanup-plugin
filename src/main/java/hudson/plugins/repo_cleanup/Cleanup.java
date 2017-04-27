@@ -46,15 +46,12 @@ class Cleanup implements FileCallable<Object> {
 
         // String[] cmd = new String[]{"ls", "-lathr"};
 
-        List<String> commandWithArgs = new ArrayList<String>();
-        commandWithArgs.addAll(Arrays.asList(command.split(" ")));
+        String remote = user + "@" + masterFqdn + ":" + pathToMasterRepo;
+        String commandWithRemoteAndSource = StringUtils.join(new String[]{command, remote, f.getPath()}, " ");
 
-        commandWithArgs.add(user + "@" + masterFqdn + ":" + pathToMasterRepo);
-        commandWithArgs.add(f.getPath());
+        listener.getLogger().println("[repo-cleanup] synchronizing with command: " + commandWithRemoteAndSource);
 
-        listener.getLogger().println("[repo-cleanup] synchronizing with command: " + StringUtils.join(commandWithArgs, " "));
-
-        ProcessBuilder pb = new ProcessBuilder(commandWithArgs);
+        ProcessBuilder pb = new ProcessBuilder(new String[] {"bash", "-c", commandWithRemoteAndSource});
         Process p = pb.start();
 
         BufferedReader stdOut = null;
