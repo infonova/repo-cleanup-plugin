@@ -28,7 +28,7 @@ public class PreBuildCleanup extends BuildWrapper {
 
     private static final String DEFAULT_HOST_FOR_REPO_SYNC = "grzcimaster01.infonova.at";
     private static final String MASTER_JENKINS_FQDN_KEY = "MASTER_JENKINS_FQDN";
-    private static final String CLEANUP_CMD = "rsync --delete -avz";
+    private static final String CLEANUP_CMD = "rsync --delete -avze 'ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'";
 
     @DataBoundConstructor
     public PreBuildCleanup() {
